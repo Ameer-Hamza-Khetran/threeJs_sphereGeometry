@@ -3,6 +3,7 @@
 import * as THREE from 'three';
 import {useEffect, useRef } from 'react'
 import { Box, } from '@chakra-ui/react'
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 export default function Sphere() {
 
@@ -11,11 +12,16 @@ export default function Sphere() {
     useEffect(() => {
         if(typeof window !== 'undefined') {
 
+            let size = {
+                width: window.innerWidth,
+                height: window.innerHeight
+            }
+
             // ---------- Scene -----------
             const scene = new THREE.Scene();
 
             // ---------- Camera -----------
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const camera = new THREE.PerspectiveCamera(75, size.width / size.height, 0.1, 1000);
             camera.position.z = 20;
             scene.add(camera);
 
@@ -30,6 +36,7 @@ export default function Sphere() {
                 color: '#00ff83',
             });
             const globe = new THREE.Mesh(geometry, material);
+            // globe.position.set(0, 0, 0);
             scene.add(globe);
 
             // ---------- Lights -----------
@@ -40,11 +47,30 @@ export default function Sphere() {
             // ---------- Canvas -----------
             containerRef.current?.appendChild(renderer.domElement);
 
-            
+            // ---------- Controls -----------
+            const controls = new OrbitControls(camera, renderer.domElement)
 
+            // ---------- Resize function that will run on window resize -----------
+            const handleResize = () => {
+                size.width = window.innerWidth;
+                size.height = window.innerHeight;
+                camera.aspect = size.width / size.height;
+                renderer.setSize(size.width, size.height);
+                camera.updateProjectionMatrix();
+            };
+
+            // ---------- Infinite Rendering loop -----------
+            // We give an infinite rendering loop to give an illusion of animation. It is actually re-rendering the canvas
+            // approx at 60 frames per second. 
+            const infiniteRenderingLoop = () => {
+                renderer.render(scene, camera);
+                requestAnimationFrame(infiniteRenderingLoop);
+            }
+            infiniteRenderingLoop();
             
+            window.addEventListener('resize', handleResize);
             renderer.render(scene, camera);
         }
     }, []);
-    return <Box ref={containerRef} w={'100%'} h={'100vh'} m={'0'}/>;
+    return <Box ref={containerRef} w={'100%'} h={'100vh'} m={'0'} p={'0'}/>;
 }
