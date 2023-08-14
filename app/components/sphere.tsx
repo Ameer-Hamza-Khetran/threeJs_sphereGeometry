@@ -2,12 +2,14 @@
 
 import * as THREE from 'three';
 import {useEffect, useRef } from 'react'
-import { Box, } from '@chakra-ui/react'
+import { Box, useBreakpointValue} from '@chakra-ui/react'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import Navbar from '@/app/components/nav'
 
 export default function Sphere() {
 
     const containerRef = useRef<HTMLDivElement | null>(null);
+    const showHamburgerIcon = useBreakpointValue({ base: true, sm: false });
 
     useEffect(() => {
         if(typeof window !== 'undefined') {
@@ -79,5 +81,14 @@ export default function Sphere() {
             renderer.render(scene, camera);
         }
     }, []);
-    return <Box ref={containerRef} w={'100%'} h={'100vh'} m={'0'} p={'0'}/>;
+    return (
+        <Box position={'relative'}>
+            {showHamburgerIcon && (
+                <Box position="absolute" top="4" right="4" zIndex="1">
+                    <Navbar />
+                </Box>
+            )}
+            <Box ref={containerRef} w={'100%'} h={'100vh'} m={'0'} p={'0'}/>
+        </Box>
+    );
 }
