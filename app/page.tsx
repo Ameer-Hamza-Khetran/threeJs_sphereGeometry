@@ -3,9 +3,6 @@ import Navbar from '@/app/components/nav';
 
 export default function Home() {
   return (
-    <>
-    {/* <Navbar /> */}
     <Sphere/>
-    </>
   )
 }

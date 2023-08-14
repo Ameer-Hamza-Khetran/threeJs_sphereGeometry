@@ -1,11 +1,9 @@
 'use client'
 
 import { useDisclosure, IconButton, Heading, Text, Drawer, DrawerOverlay, DrawerContent, DrawerCloseButton, DrawerHeader, DrawerBody} from "@chakra-ui/react";
-import { HamburgerIcon } from '@chakra-ui/icons'
-import {useState} from 'react'
+import { HamburgerIcon } from '@chakra-ui/icons';
 
 export default function Navbar() {
-    const [menuOpen, setMenuOpen] = useState(false);
     const {isOpen, onClose, onOpen, onToggle} = useDisclosure();
 
     return(
