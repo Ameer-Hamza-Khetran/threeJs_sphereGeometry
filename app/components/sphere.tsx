@@ -48,7 +48,13 @@ export default function Sphere() {
             containerRef.current?.appendChild(renderer.domElement);
 
             // ---------- Controls -----------
-            const controls = new OrbitControls(camera, renderer.domElement)
+            const controls = new OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.enablePan = false;
+            controls.enableZoom = false;
+            controls.autoRotate = true;
+            controls.autoRotateSpeed = 5;
+            
 
             // ---------- Resize function that will run on window resize -----------
             const handleResize = () => {
@@ -63,6 +69,7 @@ export default function Sphere() {
             // We give an infinite rendering loop to give an illusion of animation. It is actually re-rendering the canvas
             // approx at 60 frames per second. 
             const infiniteRenderingLoop = () => {
+                controls.update();
                 renderer.render(scene, camera);
                 requestAnimationFrame(infiniteRenderingLoop);
             }
