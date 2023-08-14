@@ -26,9 +26,9 @@ export default function Sphere() {
             scene.add(camera);
 
             // ---------- Renderer -----------
-            const renderer = new THREE.WebGLRenderer();
+            const renderer = new THREE.WebGLRenderer({ antialias: true });
             renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setPixelRatio(2);
 
             // ---------- Creating globe -----------
             const geometry = new THREE.SphereGeometry(3, 64, 64);;
@@ -41,7 +41,7 @@ export default function Sphere() {
 
             // ---------- Lights -----------
             const light = new THREE.PointLight(0xffffff, 150);
-            light.position.set(0, 10, 10);
+            light.position.set(0, 10, 15);
             scene.add(light);
 
             // ---------- Canvas -----------
@@ -71,7 +71,7 @@ export default function Sphere() {
             const infiniteRenderingLoop = () => {
                 controls.update();
                 renderer.render(scene, camera);
-                requestAnimationFrame(infiniteRenderingLoop);
+                renderer.setAnimationLoop(infiniteRenderingLoop);
             }
             infiniteRenderingLoop();
             
