@@ -5,6 +5,7 @@ import {useEffect, useRef } from 'react'
 import { Box, useBreakpointValue} from '@chakra-ui/react'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import Navbar from '@/app/components/nav'
+import { gsap } from "gsap";
 
 export default function Sphere() {
 
@@ -57,6 +58,9 @@ export default function Sphere() {
             controls.autoRotate = true;
             controls.autoRotateSpeed = 5;
             
+            //------------ gsap animation ---------
+            const timeline = gsap.timeline({defaults: {duration: 1}});
+            timeline.fromTo(globe.scale, {x: 0, y: 0, z: 0}, {x: 1.5, y: 1.5, z: 1.5})
 
             // ---------- Resize function that will run on window resize -----------
             const handleResize = () => {
