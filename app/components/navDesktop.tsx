@@ -20,17 +20,34 @@ export default function NavbarDesktop() {
                 pt={'4'}
             >
                 <Flex>
-                    <Button p={'0'} bg={'none'}>
-                        <Heading as={'h1'} fontFamily={'popins'} color={'whiteAlpha.900'}>
+                    <Button 
+                        p={'0'} 
+                        bg={'none'}
+                    >
+                        <Heading 
+                            as={'h1'} 
+                            fontFamily={'popins'} 
+                            color={'whiteAlpha.900'}
+                        >
                             Sphere
                         </Heading>
                     </Button>
                 </Flex>
-                <Flex gap={'12'}>
-                    <Button p={'0'} bg={'none'} color={'whiteAlpha.900'}>
+                <Flex 
+                    gap={'20'}
+                >
+                    <Button 
+                        p={'0'} 
+                        bg={'none'} 
+                        color={'whiteAlpha.900'}
+                    >
                         Explore
                     </Button>
-                    <Button p={'0'} bg={'none'} color={'whiteAlpha.900'}>
+                    <Button 
+                        p={'0'} 
+                        bg={'none'} 
+                        color={'whiteAlpha.900'}
+                    >
                         Create
                     </Button>
                 </Flex>

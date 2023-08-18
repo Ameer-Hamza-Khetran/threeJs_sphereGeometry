@@ -5,7 +5,6 @@ import {useEffect, useRef } from 'react'
 import { Box, useBreakpointValue} from '@chakra-ui/react'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import Navbar from '@/app/components/nav';
-import NavbarDesktop from "@/app/components/navDesktop";
 import { gsap } from "gsap";
 
 export default function Sphere() {
