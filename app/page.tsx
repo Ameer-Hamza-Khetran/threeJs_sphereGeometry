@@ -1,8 +1,11 @@
 import Sphere from '@/app/components/sphere';
-import Navbar from '@/app/components/nav';
+import NavbarDesktop from '@/app/components/navDesktop';
 
 export default function Home() {
   return (
-    <Sphere/>
+    <>
+      <NavbarDesktop/>
+      <Sphere/>
+    </>
   )
 }
