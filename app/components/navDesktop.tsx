@@ -38,7 +38,7 @@ export default function NavbarDesktop() {
             >
                 <Flex>
                     <Link 
-                        as={NextLink} href='#' 
+                        as={NextLink} href='/' 
                         fontFamily={'popins'} 
                         color={'whiteAlpha.900'} 
                         fontSize={'4xl'}
@@ -56,7 +56,7 @@ export default function NavbarDesktop() {
                     alignItems={'center'}
                 >
                     <Link
-                        as={NextLink} href='#' 
+                        as={NextLink} href='/' 
                         fontFamily={'popins'} 
                         color={'whiteAlpha.800'}
                         fontSize={'xl'}
@@ -68,7 +68,7 @@ export default function NavbarDesktop() {
                         Explore
                     </Link>
                     <Link
-                        as={NextLink} href='#' 
+                        as={NextLink} href='/' 
                         fontFamily={'popins'} 
                         color={'whiteAlpha.800'}
                         fontSize={'xl'}
