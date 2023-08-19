@@ -31,6 +31,7 @@ export default function NavbarDesktop() {
                             {
                                 textDecoration: 'none',
                             }}
+                        ml={'4'}
                     >
                         Sphere
                     </Link>
@@ -42,7 +43,7 @@ export default function NavbarDesktop() {
                     <Link
                         as={NextLink} href='#' 
                         fontFamily={'popins'} 
-                        color={'whiteAlpha.900'}
+                        color={'whiteAlpha.800'}
                         fontSize={'xl'}
                         _hover={
                             {
@@ -54,7 +55,7 @@ export default function NavbarDesktop() {
                     <Link
                         as={NextLink} href='#' 
                         fontFamily={'popins'} 
-                        color={'whiteAlpha.900'}
+                        color={'whiteAlpha.800'}
                         fontSize={'xl'}
                         _hover={
                             {

@@ -6,6 +6,7 @@ import { Box, useBreakpointValue} from '@chakra-ui/react'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import Navbar from '@/app/components/nav';
 import { gsap } from "gsap";
+import { Headline, Tagline } from "@/app/components/text";
 
 export default function Sphere() {
 
@@ -92,7 +93,10 @@ export default function Sphere() {
                     <Navbar />
                 </Box>
             )}
-            <Box ref={containerRef} w={'100%'} h={'100vh'} m={'0'} p={'0'}/>
+            <Box ref={containerRef} w={'100%'} h={'100vh'} m={'0'} p={'0'}>
+                <Headline />
+                <Tagline/>
+            </Box>
         </Box>
     );
 }
