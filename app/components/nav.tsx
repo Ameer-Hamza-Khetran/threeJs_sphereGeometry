@@ -1,6 +1,7 @@
 'use client'
 
-import { useDisclosure, IconButton, Heading, Text, Drawer, DrawerOverlay, DrawerContent, DrawerCloseButton, DrawerHeader, DrawerBody} from "@chakra-ui/react";
+import NextLink from 'next/link';
+import { useDisclosure, IconButton, Heading, Text, Drawer, DrawerOverlay, DrawerContent, DrawerCloseButton, DrawerHeader, DrawerBody, Link} from "@chakra-ui/react";
 import { HamburgerIcon } from '@chakra-ui/icons';
 
 export default function Navbar() {
@@ -23,14 +24,29 @@ export default function Navbar() {
             <DrawerOverlay />
             <DrawerContent>
                 <DrawerHeader>
-                    <Heading as='h1' size='md'>Sphere</Heading>
+                    <Link
+                        as={NextLink} href='/' 
+                        fontFamily={'popins'} 
+                    >
+                        <Heading as='h1' size='md'>Sphere</Heading>
+                    </Link>
                     <DrawerCloseButton 
                         size={'lg'}
                     />
                 </DrawerHeader>
                 <DrawerBody display={'flex'} flexDir={"column"} mx={'auto'} justifyContent={'center'} gap={'8'}>
-                    <Text>Explore</Text>
-                    <Text>Create</Text>
+                    <Link
+                        as={NextLink} href='/' 
+                        fontFamily={'popins'} 
+                    >
+                        <Text>Explore</Text>
+                    </Link>
+                    <Link
+                        as={NextLink} href='/' 
+                        fontFamily={'popins'} 
+                    >
+                        <Text>Create</Text>
+                    </Link>
                 </DrawerBody>
             </DrawerContent>
 
