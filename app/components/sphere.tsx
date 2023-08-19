@@ -88,7 +88,7 @@ export default function Sphere() {
     return (
         <Box position={'absolute'} top={'0'}>
             {showHamburgerIcon && (
-                <Box position="absolute" top="4" right="4" zIndex="1">
+                <Box position="absolute" top="4" right="4" zIndex={'docked'}>
                     <Navbar />
                 </Box>
             )}

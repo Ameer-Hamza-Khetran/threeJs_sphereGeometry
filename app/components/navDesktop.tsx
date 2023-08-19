@@ -1,6 +1,8 @@
 'use client'
 
-import { useBreakpointValue, Box, Button, Flex, Heading } from '@chakra-ui/react';
+import NextLink from 'next/link';
+
+import { useBreakpointValue, Box, Button, Flex, Heading, Link,  } from '@chakra-ui/react';
 
 export default function NavbarDesktop() {
     const isSmScreen = useBreakpointValue({ base: true, sm: false })
@@ -10,7 +12,7 @@ export default function NavbarDesktop() {
             fontFamily={'popins'}
             position={'relative'}
             top={'0'}
-            zIndex={'1'}
+            zIndex={'docked'}
             display={isSmScreen ? 'none' : 'block'}
         >
             <Flex 
@@ -20,36 +22,47 @@ export default function NavbarDesktop() {
                 pt={'4'}
             >
                 <Flex>
-                    <Button 
-                        p={'0'} 
-                        bg={'none'}
+                    <Link 
+                        as={NextLink} href='#' 
+                        fontFamily={'popins'} 
+                        color={'whiteAlpha.900'} 
+                        fontSize={'4xl'}
+                        _hover={
+                            {
+                                textDecoration: 'none',
+                            }}
                     >
-                        <Heading 
-                            as={'h1'} 
-                            fontFamily={'popins'} 
-                            color={'whiteAlpha.900'}
-                        >
-                            Sphere
-                        </Heading>
-                    </Button>
+                        Sphere
+                    </Link>
                 </Flex>
                 <Flex 
                     gap={'20'}
+                    alignItems={'center'}
                 >
-                    <Button 
-                        p={'0'} 
-                        bg={'none'} 
+                    <Link
+                        as={NextLink} href='#' 
+                        fontFamily={'popins'} 
                         color={'whiteAlpha.900'}
+                        fontSize={'xl'}
+                        _hover={
+                            {
+                                textDecoration: 'none',
+                            }}
                     >
                         Explore
-                    </Button>
-                    <Button 
-                        p={'0'} 
-                        bg={'none'} 
+                    </Link>
+                    <Link
+                        as={NextLink} href='#' 
+                        fontFamily={'popins'} 
                         color={'whiteAlpha.900'}
+                        fontSize={'xl'}
+                        _hover={
+                            {
+                                textDecoration: 'none',
+                            }}
                     >
                         Create
-                    </Button>
+                    </Link>
                 </Flex>
             </Flex>
         </Box>
