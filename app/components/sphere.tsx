@@ -38,13 +38,14 @@ export default function Sphere() {
             const geometry = new THREE.SphereGeometry(3, 64, 64);;
             const material = new THREE.MeshStandardMaterial({
                 color: '#00ff83',
+                roughness: 0.2
             });
             const globe = new THREE.Mesh(geometry, material);
             // globe.position.set(0, 0, 0);
             scene.add(globe);
 
             // ---------- Lights -----------
-            const light = new THREE.PointLight(0xffffff, 150);
+            const light = new THREE.PointLight(0xffffff, 1000);
             light.position.set(0, 10, 15);
             scene.add(light);
 
@@ -81,6 +82,37 @@ export default function Sphere() {
                 renderer.setAnimationLoop(infiniteRenderingLoop);
             }
             infiniteRenderingLoop();
+
+            //--------- Changing color of globe on mouse down Start---------
+            const blueValue = 150;
+            let mouseDown = false;
+
+            window.addEventListener('mousedown', () => {
+                mouseDown = true;
+            });
+
+            window.addEventListener('mouseup', () => {
+                mouseDown = false;
+            });
+
+            window.addEventListener('mousemove', (e) => {
+                if (mouseDown) {
+                    const normalizedX:number = e.clientX / window.innerWidth;
+                    const normalizedY:number = e.clientY / window.innerHeight;
+
+                    const r = Math.round(normalizedX * 255);
+                    const g = Math.round(normalizedY * 255);
+
+                    const color = new THREE.Color(r / 255, g / 255, blueValue / 255);
+                    gsap.to(globe.material.color, {
+                        r: color.r,
+                        g: color.g,
+                        b: color.b,
+                        duration: 0.3,
+                    });
+                }
+            });
+            //--------- Changing color of globe on mouse down End---------
             
             window.addEventListener('resize', handleResize);
             renderer.render(scene, camera);

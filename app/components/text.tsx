@@ -39,7 +39,7 @@ export function Headline() {
 
 export function Tagline() {
     const tagLineFontSize = useBreakpointValue({ base: "xl", sm: "2xl" });
-    const tagLineBottom = useBreakpointValue({ base: "28", sm: "24", md:"20", lg:"8"});
+    const tagLineBottom = useBreakpointValue({ base: "28", sm: "24", md:"28", lg:"20"});
 
     const taglineRef = useRef(null);
 
