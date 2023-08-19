@@ -9,17 +9,17 @@ export default function NavbarDesktop() {
 
     const isSmScreen = useBreakpointValue({ base: true, sm: false });
     const navbarRef = useRef(null)
+
     useLayoutEffect(() => {
-        if(navbarRef !== null) {
-            console.log('code works');
-        const timeline = gsap.timeline({defaults: {duration: 1}});
-        setTimeout(() => {
-            timeline.fromTo(navbarRef.current, {y: -100}, {y: 0})
+        if (navbarRef.current !== null) {
+            const timeline = gsap.timeline({ defaults: { duration: 1 } });
+    
+            timeline.delay(0.8);
+            timeline.fromTo(navbarRef.current, { y: -100 }, { y: 0 });
             timeline.addPause();
             timeline.play();
-        },0);
-    }
-    }, [])
+        }
+    }, []);
 
     return(
         <Box 
