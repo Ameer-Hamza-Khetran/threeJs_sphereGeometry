@@ -84,7 +84,6 @@ export default function Sphere() {
             infiniteRenderingLoop();
 
             //--------- Changing color of globe on mouse down Start---------
-            // const blueValue = 150;
             let mouseDown = false;
 
             window.addEventListener('mousedown', () => {
@@ -113,6 +112,7 @@ export default function Sphere() {
                     });
                 }
             });
+            //--------- Changing color of globe on mouse down End---------
             
             window.addEventListener('resize', handleResize);
             renderer.render(scene, camera);
