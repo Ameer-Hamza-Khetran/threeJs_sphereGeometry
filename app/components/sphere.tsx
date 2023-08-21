@@ -84,7 +84,7 @@ export default function Sphere() {
             infiniteRenderingLoop();
 
             //--------- Changing color of globe on mouse down Start---------
-            const blueValue = 150;
+            // const blueValue = 150;
             let mouseDown = false;
 
             window.addEventListener('mousedown', () => {
@@ -102,8 +102,9 @@ export default function Sphere() {
 
                     const r = Math.round(normalizedX * 255);
                     const g = Math.round(normalizedY * 255);
+                    const b = Math.round((1 - normalizedX) * 255);
 
-                    const color = new THREE.Color(r / 255, g / 255, blueValue / 255);
+                    const color = new THREE.Color(r / 255, g / 255, b / 255);
                     gsap.to(globe.material.color, {
                         r: color.r,
                         g: color.g,
@@ -112,7 +113,6 @@ export default function Sphere() {
                     });
                 }
             });
-            //--------- Changing color of globe on mouse down End---------
             
             window.addEventListener('resize', handleResize);
             renderer.render(scene, camera);
