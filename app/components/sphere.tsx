@@ -7,11 +7,13 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import Navbar from '@/app/components/nav';
 import { gsap } from "gsap";
 import { Headline, Tagline } from "@/app/components/text";
+import { CSS2DRenderer } from 'three/addons/renderers/CSS2DRenderer.js';
 
 export default function Sphere() {
 
     const containerRef = useRef<HTMLDivElement | null>(null);
     const showHamburgerIcon = useBreakpointValue({ base: true, sm: false });
+    
 
     useEffect(() => {
         if(typeof window !== 'undefined') {

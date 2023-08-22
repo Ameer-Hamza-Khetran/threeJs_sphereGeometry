@@ -6,7 +6,7 @@ import { useRef, useLayoutEffect } from 'react';
 
 export function Headline() {
     const headlineFontSize = useBreakpointValue({ base: "3xl", md: "4xl", lg: "5xl" });
-    const headlineTop = useBreakpointValue({ base: "32", sm: "36", md:"auto"});
+    const headlineTop = useBreakpointValue({ base: "32", sm: "36", md: "null"});
     const headlineBottom = useBreakpointValue({ md:"40", lg:"28"});
 
     const headlineRef = useRef(null);
