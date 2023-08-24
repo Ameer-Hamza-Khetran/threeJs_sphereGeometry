@@ -2,64 +2,69 @@
 
 import NextLink from 'next/link';
 import { gsap } from "gsap";
-import { useBreakpointValue, Box, Button, Flex, Heading, Link,  } from '@chakra-ui/react';
-import { useLayoutEffect, useRef } from 'react';
+import { useBreakpointValue, Box, Button, Flex, Heading, Link, Portal, } from '@chakra-ui/react';
+import { useLayoutEffect, useRef, useState } from 'react';
 
 export default function NavbarDesktop() {
 
     const isSmScreen = useBreakpointValue({ base: true, sm: false });
-    const navbarRef = useRef(null)
+    const sphereFontSize = useBreakpointValue({base: '4xl'});
+    const linksFontSize = useBreakpointValue({base: 'xl'});
+    // const navbarRef = useRef(null)
 
     useLayoutEffect(() => {
-        if (navbarRef.current !== null) {
-            const timeline = gsap.timeline({ defaults: { duration: 1 } });
-    
-            timeline.delay(0.8);
-            timeline.fromTo(navbarRef.current, { y: -100 }, { y: 0 });
-            timeline.addPause();
-            timeline.play();
-        }
+        // if (navbarRef.current !== null) {
+        //     const timeline = gsap.timeline({ defaults: { duration: 1 } });
+
+        //     timeline.delay(0.8);
+        //     timeline.fromTo(navbarRef.current, { y: -100 }, { y: 0 });
+        //     timeline.addPause();
+        //     timeline.play();
+        // }
     }, []);
 
-    return(
-        <Box 
-            ref={navbarRef}
+    return (
+        <Box
+            // ref={navbarRef}
             fontFamily={'popins'}
-            position={'relative'}
+            position={'absolute'}
             top={'0'}
-            zIndex={'docked'}
-            display={isSmScreen ? 'none' : 'block'}
+            width={'full'}
+            // zIndex={'docked'}
+            display={isSmScreen ? 'none' : 'flex'}
+            // mx={'auto'}
         >
-            <Flex 
-                w={'90vw'} 
-                mx={'auto'} 
-                justifyContent={'space-between'} 
+            <Flex
+                w={'full'}
+                // mx={'auto'}
+                justifyContent={'space-between'}
                 pt={'4'}
+                px={'8'}
             >
                 <Flex>
-                    <Link 
-                        as={NextLink} href='/' 
-                        fontFamily={'popins'} 
-                        color={'whiteAlpha.900'} 
-                        fontSize={'4xl'}
+                    <Link
+                        as={NextLink} href='/'
+                        fontFamily={'popins'}
+                        color={'whiteAlpha.900'}
+                        fontSize={sphereFontSize}
                         _hover={
                             {
                                 textDecoration: 'none',
                             }}
-                        ml={'4'}
+                        // ml={'4'}
                     >
                         Sphere
                     </Link>
                 </Flex>
-                <Flex 
+                <Flex
                     gap={'20'}
                     alignItems={'center'}
                 >
                     <Link
-                        as={NextLink} href='/' 
-                        fontFamily={'popins'} 
+                        as={NextLink} href='/'
+                        fontFamily={'popins'}
                         color={'whiteAlpha.800'}
-                        fontSize={'xl'}
+                        fontSize={linksFontSize}
                         _hover={
                             {
                                 textDecoration: 'none',
@@ -68,10 +73,10 @@ export default function NavbarDesktop() {
                         Explore
                     </Link>
                     <Link
-                        as={NextLink} href='/' 
-                        fontFamily={'popins'} 
+                        as={NextLink} href='/'
+                        fontFamily={'popins'}
                         color={'whiteAlpha.800'}
-                        fontSize={'xl'}
+                        fontSize={linksFontSize}
                         _hover={
                             {
                                 textDecoration: 'none',

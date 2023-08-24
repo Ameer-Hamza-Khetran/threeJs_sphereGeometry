@@ -1,19 +1,19 @@
 'use client'
 
 import * as THREE from 'three';
-import {useEffect, useRef } from 'react'
+import {useEffect, useRef, useState } from 'react'
 import { Box, useBreakpointValue} from '@chakra-ui/react'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import Navbar from '@/app/components/nav';
 import { gsap } from "gsap";
 import { Headline, Tagline } from "@/app/components/text";
 import { CSS2DRenderer } from 'three/addons/renderers/CSS2DRenderer.js';
+import NavbarDesktop from "@/app/components/navDesktop";
 
 export default function Sphere() {
 
     const containerRef = useRef<HTMLDivElement | null>(null);
-    const showHamburgerIcon = useBreakpointValue({ base: true, sm: false });
-    
+    const showHamburgerIcon = useBreakpointValue({ base: true, sm: false });    
 
     useEffect(() => {
         if(typeof window !== 'undefined') {
@@ -73,6 +73,9 @@ export default function Sphere() {
                 camera.aspect = size.width / size.height;
                 renderer.setSize(size.width, size.height);
                 camera.updateProjectionMatrix();
+
+                document.documentElement.style.setProperty('--window-inner-width', `${size.width}px`);
+                document.documentElement.style.setProperty('--window-inner-height', `${size.height}px`);
             };
 
             // ---------- Infinite Rendering loop -----------
@@ -121,13 +124,14 @@ export default function Sphere() {
         }
     }, []);
     return (
-        <Box position={'absolute'} top={'0'}>
+        <Box width={'full'}>
             {showHamburgerIcon && (
-                <Box position="absolute" top="4" right="4" zIndex={'docked'}>
+                <Box position="relative" top="4" right="4" zIndex={'docked'}>
                     <Navbar />
                 </Box>
             )}
-            <Box ref={containerRef} w={'100%'} h={'100vh'} m={'0'} p={'0'}>
+            <Box ref={containerRef} w={'full'} h={'100vh'} m={'0'} p={'0'}>
+                <NavbarDesktop/>
                 <Headline />
                 <Tagline/>
             </Box>

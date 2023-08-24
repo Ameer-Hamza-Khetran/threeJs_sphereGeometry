@@ -25,7 +25,7 @@ export function Headline() {
         <Box ref={headlineRef} position={'absolute'} top={headlineTop} bottom={headlineBottom} h={'min-content'} w={'full'}>
             <Text
                 as={'h2'}
-                fontSize={headlineFontSize}
+                fontSize={'4xl'}
                 color={'whiteAlpha.900'}
                 fontWeight={'bold'}
                 textAlign={'center'}

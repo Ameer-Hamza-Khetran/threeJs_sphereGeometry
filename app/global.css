@@ -1,0 +1,11 @@
+:root {
+    --window-inner-width: 100vw;
+    --window-inner-height: 100vh;
+  }
+html, body {
+    width: var(--window-inner-width);
+    height: var(--window-inner-height);
+}
+.css-1rle3oi, .css-1ki54i {
+    height: var(--window-inner-height);
+}
