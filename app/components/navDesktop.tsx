@@ -2,44 +2,41 @@
 
 import NextLink from 'next/link';
 import { gsap } from "gsap";
-import { useBreakpointValue, Box, Button, Flex, Heading, Link, Portal, } from '@chakra-ui/react';
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useBreakpointValue, Box, Flex, Link } from '@chakra-ui/react';
+import { useLayoutEffect, useRef } from 'react';
 
 export default function NavbarDesktop() {
 
     const isSmScreen = useBreakpointValue({ base: true, sm: false });
-    const sphereFontSize = useBreakpointValue({base: '4xl'});
-    const linksFontSize = useBreakpointValue({base: 'xl'});
-    // const navbarRef = useRef(null)
+    const sphereFontSize = useBreakpointValue({base: '4xl', lg: '5xl'});
+    const linksFontSize = useBreakpointValue({base: 'xl', lg:'2xl'});
+    const navbarRef = useRef(null)
 
     useLayoutEffect(() => {
-        // if (navbarRef.current !== null) {
-        //     const timeline = gsap.timeline({ defaults: { duration: 1 } });
+        if (navbarRef.current !== null) {
+            const timeline = gsap.timeline({ defaults: { duration: 1 } });
 
-        //     timeline.delay(0.8);
-        //     timeline.fromTo(navbarRef.current, { y: -100 }, { y: 0 });
-        //     timeline.addPause();
-        //     timeline.play();
-        // }
+            timeline.delay(0.8);
+            timeline.fromTo(navbarRef.current, { y: -100 }, { y: 0 });
+            timeline.addPause();
+            timeline.play();
+        }
     }, []);
 
     return (
-        <Box
-            // ref={navbarRef}
+        <Box 
+            ref={navbarRef}
             fontFamily={'popins'}
             position={'absolute'}
             top={'0'}
             width={'full'}
-            // zIndex={'docked'}
             display={isSmScreen ? 'none' : 'flex'}
-            // mx={'auto'}
         >
             <Flex
                 w={'full'}
-                // mx={'auto'}
                 justifyContent={'space-between'}
                 pt={'4'}
-                px={'8'}
+                px={{base:'8',lg: '16', xl: '24'}}
             >
                 <Flex>
                     <Link
@@ -51,7 +48,6 @@ export default function NavbarDesktop() {
                             {
                                 textDecoration: 'none',
                             }}
-                        // ml={'4'}
                     >
                         Sphere
                     </Link>

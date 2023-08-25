@@ -25,7 +25,7 @@ export function Headline() {
         <Box ref={headlineRef} position={'absolute'} top={headlineTop} bottom={headlineBottom} h={'min-content'} w={'full'}>
             <Text
                 as={'h2'}
-                fontSize={'4xl'}
+                fontSize={headlineFontSize}
                 color={'whiteAlpha.900'}
                 fontWeight={'bold'}
                 textAlign={'center'}
@@ -54,9 +54,9 @@ export function Tagline() {
     },[])
 
     return(
-        <Box ref={taglineRef} position={'absolute'} bottom={tagLineBottom} w={'full'} display={'flex'} justifyContent={'center'} h={'min-content'}>
+        <Box ref={taglineRef} position={'absolute'} bottom={tagLineBottom} w={'full'} justifyContent={'center'} h={'min-content'}>
             <Text
-                w={'80vw'}
+                as={'h2'}
                 fontSize={tagLineFontSize}
                 color={'whiteAlpha.900'}
                 fontWeight={'normal'}
