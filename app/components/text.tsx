@@ -6,7 +6,7 @@ import { useRef, useLayoutEffect } from 'react';
 
 export function Headline() {
     const headlineFontSize = useBreakpointValue({ base: "3xl", md: "4xl", lg: "5xl" });
-    const headlineTop = useBreakpointValue({ base: "32", sm: "36", md:"auto"});
+    const headlineTop = useBreakpointValue({ base: "32", sm: "36", md: "null"});
     const headlineBottom = useBreakpointValue({ md:"40", lg:"28"});
 
     const headlineRef = useRef(null);
@@ -54,9 +54,9 @@ export function Tagline() {
     },[])
 
     return(
-        <Box ref={taglineRef} position={'absolute'} bottom={tagLineBottom} w={'full'} display={'flex'} justifyContent={'center'} h={'min-content'}>
+        <Box ref={taglineRef} position={'absolute'} bottom={tagLineBottom} w={'full'} justifyContent={'center'} h={'min-content'}>
             <Text
-                w={'80vw'}
+                as={'h2'}
                 fontSize={tagLineFontSize}
                 color={'whiteAlpha.900'}
                 fontWeight={'normal'}
