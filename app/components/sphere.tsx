@@ -33,24 +33,17 @@ export default function Sphere() {
             camera.position.z = 20;
             scene.add(camera);
 
+            // ---------- globe texture -----------
+            const loader = new THREE.TextureLoader();
+            const texture = loader.load('./earthTexture/earth04.jpeg');
             // ---------- material globe -----------
-            const geometry = new THREE.SphereGeometry(3, 64, 64);;
-            const material = new THREE.MeshStandardMaterial({
-                color: '#00ff83',
-                roughness: 0.2
-            });
-            if (material.map) {
-                material.map.magFilter = THREE.LinearFilter;
-                material.map.minFilter = THREE.LinearMipmapLinearFilter;
-            }           
+            const geometry = new THREE.SphereGeometry(3, 64, 64);
+            const material = new THREE.MeshBasicMaterial({
+                map: texture
+            });          
             const globe = new THREE.Mesh(geometry, material);
             globe.position.set(0, 0, 0);
             scene.add(globe);
-
-            // ---------- Lights -----------
-            const light = new THREE.PointLight(0xffffff, 1000);
-            light.position.set(0, 10, 15);
-            scene.add(light);
 
             containerRef.current?.appendChild(renderer.domElement);
 
@@ -65,37 +58,6 @@ export default function Sphere() {
             //------------ gsap animation ---------
             const timeline = gsap.timeline({defaults: {duration: 1}});
             timeline.fromTo(globe.scale, {x: 0, y: 0, z: 0}, {x: 1.5, y: 1.5, z: 1.5})
-
-            //--------- Changing color of globe on mouse down Start---------
-            let mouseDown = false;
-
-            window.addEventListener('mousedown', () => {
-                mouseDown = true;
-            });
-
-            window.addEventListener('mouseup', () => {
-                mouseDown = false;
-            });
-
-            window.addEventListener('mousemove', (e) => {
-                if (mouseDown) {
-                    const normalizedX:number = e.clientX / window.innerWidth;
-                    const normalizedY:number = e.clientY / window.innerHeight;
-
-                    const r = Math.round(normalizedX * 255);
-                    const g = Math.round(normalizedY * 255);
-                    const b = Math.round((1 - normalizedX) * 255);
-
-                    const color = new THREE.Color(r / 255, g / 255, b / 255);
-                    gsap.to(globe.material.color, {
-                        r: color.r,
-                        g: color.g,
-                        b: color.b,
-                        duration: 0.3,
-                    });
-                }
-            });
-            //--------- Changing color of globe on mouse down End---------
 
             // ---------- Resize function that will run on window resize -----------
             const handleResize = () => {
