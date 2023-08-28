@@ -37,18 +37,38 @@ export default function Sphere() {
             // ---------- Empty array to store all objects -----------
             let objects:THREE.Object3D[] = [];
 
+            // ---------- solar system mesh ---------
+            const solar = new THREE.Object3D();
+            scene.add(solar);
+            objects.push(solar);
+
             // ---------- globe texture -----------
             const loader = new THREE.TextureLoader();
-            const texture = loader.load('./earthTexture/earth05.jpeg');
-            // ---------- material globe -----------
+            const earthTexture = loader.load('./earthTexture/earth05.jpeg');
+
+            // ---------- material globe earth -----------
             const geometry = new THREE.SphereGeometry(3, 64, 64);
             const material = new THREE.MeshBasicMaterial({
-                map: texture
+                map: earthTexture
             });          
             const globe = new THREE.Mesh(geometry, material);
             globe.position.set(0, 0, 0);
-            scene.add(globe);
+            solar.add(globe);
             objects.push(globe);
+
+            // ----------- moon texture ---------------
+            const moonTexture = loader.load('./moonTexture/moon01.jpeg');
+
+            // ----------- material globe moon --------------
+            const moon = new THREE.MeshBasicMaterial({
+                map: moonTexture
+            })
+            const moonMesh = new THREE.Mesh(geometry, moon);
+            globe.add(moonMesh);
+            moonMesh.position.set(8, 0  , 0);
+            moonMesh.rotation.y += 0.8;
+            moonMesh.scale.set(0.2, 0.2, 0.2);
+            objects.push(moonMesh);
 
             containerRef.current?.appendChild(renderer.domElement);
 
