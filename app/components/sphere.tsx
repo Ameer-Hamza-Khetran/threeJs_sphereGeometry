@@ -35,7 +35,7 @@ export default function Sphere() {
 
             // ---------- globe texture -----------
             const loader = new THREE.TextureLoader();
-            const texture = loader.load('./earthTexture/earth04.jpeg');
+            const texture = loader.load('./earthTexture/earth05.jpeg');
             // ---------- material globe -----------
             const geometry = new THREE.SphereGeometry(3, 64, 64);
             const material = new THREE.MeshBasicMaterial({
@@ -80,17 +80,17 @@ export default function Sphere() {
     }, []);
     return (
         <>
-        <Box>
-            {showHamburgerIcon && (
-                <Box position="absolute" top="4" right="4" zIndex={'docked'}>
-                    <Navbar />
-                </Box>
-            )}
-            <NavbarDesktop />
-        </Box>
-        <Headline/>
-        <Tagline />
-        <Box height={'100vh'} width={'full'} ref={containerRef} />
+            <Box>
+                {showHamburgerIcon && (
+                    <Box position="absolute" top="4" right="4" zIndex={'docked'}>
+                        <Navbar />
+                    </Box>
+                )}
+                <NavbarDesktop />
+            </Box>
+            <Headline/>
+            <Tagline />
+            <Box height={'100vh'} width={'full'} ref={containerRef} />
         </>
     );
 }
