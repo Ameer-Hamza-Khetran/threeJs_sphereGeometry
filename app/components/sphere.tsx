@@ -8,6 +8,7 @@ import Navbar from '@/app/components/nav';
 import { gsap } from "gsap";
 import { Headline, Tagline } from "@/app/components/text";
 import NavbarDesktop from "@/app/components/navDesktop";
+import { time } from 'console';
 
 
 
@@ -33,6 +34,9 @@ export default function Sphere() {
             camera.position.z = 20;
             scene.add(camera);
 
+            // ---------- Empty array to store all objects -----------
+            let objects:THREE.Object3D[] = [];
+
             // ---------- globe texture -----------
             const loader = new THREE.TextureLoader();
             const texture = loader.load('./earthTexture/earth05.jpeg');
@@ -44,6 +48,7 @@ export default function Sphere() {
             const globe = new THREE.Mesh(geometry, material);
             globe.position.set(0, 0, 0);
             scene.add(globe);
+            objects.push(globe);
 
             containerRef.current?.appendChild(renderer.domElement);
 
@@ -52,8 +57,6 @@ export default function Sphere() {
             controls.enableDamping = true;
             controls.enablePan = false;
             controls.enableZoom = false;
-            controls.autoRotate = true;
-            controls.autoRotateSpeed = 5;
             
             //------------ gsap animation ---------
             const timeline = gsap.timeline({defaults: {duration: 1}});
@@ -69,6 +72,9 @@ export default function Sphere() {
             const infiniteRenderingLoop = () => {
                 window.addEventListener('resize', handleResize);
                 controls.update();
+                objects.forEach(obj => {
+                    obj.rotation.y += 0.003
+                })
                 renderer.render(scene, camera);
                 renderer.setAnimationLoop(infiniteRenderingLoop);
             }
