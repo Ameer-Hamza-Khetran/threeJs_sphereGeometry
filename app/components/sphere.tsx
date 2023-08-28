@@ -66,7 +66,6 @@ export default function Sphere() {
             const moonMesh = new THREE.Mesh(geometry, moon);
             globe.add(moonMesh);
             moonMesh.position.set(8, 0  , 0);
-            moonMesh.rotation.y += 0.8;
             moonMesh.scale.set(0.2, 0.2, 0.2);
             objects.push(moonMesh);
 
