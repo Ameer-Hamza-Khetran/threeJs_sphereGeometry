@@ -8,6 +8,7 @@ import Navbar from '@/app/components/nav';
 import { gsap } from "gsap";
 import { Headline, Tagline } from "@/app/components/text";
 import NavbarDesktop from "@/app/components/navDesktop";
+import { time } from 'console';
 
 
 
@@ -33,24 +34,40 @@ export default function Sphere() {
             camera.position.z = 20;
             scene.add(camera);
 
-            // ---------- material globe -----------
-            const geometry = new THREE.SphereGeometry(3, 64, 64);;
-            const material = new THREE.MeshStandardMaterial({
-                color: '#00ff83',
-                roughness: 0.2
-            });
-            if (material.map) {
-                material.map.magFilter = THREE.LinearFilter;
-                material.map.minFilter = THREE.LinearMipmapLinearFilter;
-            }           
+            // ---------- Empty array to store all objects -----------
+            let objects:THREE.Object3D[] = [];
+
+            // ---------- solar system mesh ---------
+            const solar = new THREE.Object3D();
+            scene.add(solar);
+            objects.push(solar);
+
+            // ---------- globe texture -----------
+            const loader = new THREE.TextureLoader();
+            const earthTexture = loader.load('./earthTexture/earth05.jpeg');
+
+            // ---------- material globe earth -----------
+            const geometry = new THREE.SphereGeometry(3, 64, 64);
+            const material = new THREE.MeshBasicMaterial({
+                map: earthTexture
+            });          
             const globe = new THREE.Mesh(geometry, material);
             globe.position.set(0, 0, 0);
-            scene.add(globe);
+            solar.add(globe);
+            objects.push(globe);
 
-            // ---------- Lights -----------
-            const light = new THREE.PointLight(0xffffff, 1000);
-            light.position.set(0, 10, 15);
-            scene.add(light);
+            // ----------- moon texture ---------------
+            const moonTexture = loader.load('./moonTexture/moon01.jpeg');
+
+            // ----------- material globe moon --------------
+            const moon = new THREE.MeshBasicMaterial({
+                map: moonTexture
+            })
+            const moonMesh = new THREE.Mesh(geometry, moon);
+            globe.add(moonMesh);
+            moonMesh.position.set(8, 0  , 0);
+            moonMesh.scale.set(0.2, 0.2, 0.2);
+            objects.push(moonMesh);
 
             containerRef.current?.appendChild(renderer.domElement);
 
@@ -59,43 +76,10 @@ export default function Sphere() {
             controls.enableDamping = true;
             controls.enablePan = false;
             controls.enableZoom = false;
-            controls.autoRotate = true;
-            controls.autoRotateSpeed = 5;
             
             //------------ gsap animation ---------
             const timeline = gsap.timeline({defaults: {duration: 1}});
             timeline.fromTo(globe.scale, {x: 0, y: 0, z: 0}, {x: 1.5, y: 1.5, z: 1.5})
-
-            //--------- Changing color of globe on mouse down Start---------
-            let mouseDown = false;
-
-            window.addEventListener('mousedown', () => {
-                mouseDown = true;
-            });
-
-            window.addEventListener('mouseup', () => {
-                mouseDown = false;
-            });
-
-            window.addEventListener('mousemove', (e) => {
-                if (mouseDown) {
-                    const normalizedX:number = e.clientX / window.innerWidth;
-                    const normalizedY:number = e.clientY / window.innerHeight;
-
-                    const r = Math.round(normalizedX * 255);
-                    const g = Math.round(normalizedY * 255);
-                    const b = Math.round((1 - normalizedX) * 255);
-
-                    const color = new THREE.Color(r / 255, g / 255, b / 255);
-                    gsap.to(globe.material.color, {
-                        r: color.r,
-                        g: color.g,
-                        b: color.b,
-                        duration: 0.3,
-                    });
-                }
-            });
-            //--------- Changing color of globe on mouse down End---------
 
             // ---------- Resize function that will run on window resize -----------
             const handleResize = () => {
@@ -107,6 +91,9 @@ export default function Sphere() {
             const infiniteRenderingLoop = () => {
                 window.addEventListener('resize', handleResize);
                 controls.update();
+                objects.forEach(obj => {
+                    obj.rotation.y += 0.003
+                })
                 renderer.render(scene, camera);
                 renderer.setAnimationLoop(infiniteRenderingLoop);
             }
@@ -118,17 +105,17 @@ export default function Sphere() {
     }, []);
     return (
         <>
-        <Box>
-            {showHamburgerIcon && (
-                <Box position="absolute" top="4" right="4" zIndex={'docked'}>
-                    <Navbar />
-                </Box>
-            )}
-            <NavbarDesktop />
-        </Box>
-        <Headline/>
-        <Tagline />
-        <Box height={'100vh'} width={'full'} ref={containerRef} />
+            <Box>
+                {showHamburgerIcon && (
+                    <Box position="absolute" top="4" right="4" zIndex={'docked'}>
+                        <Navbar />
+                    </Box>
+                )}
+                <NavbarDesktop />
+            </Box>
+            <Headline/>
+            <Tagline />
+            <Box height={'100vh'} width={'full'} ref={containerRef} />
         </>
     );
 }
