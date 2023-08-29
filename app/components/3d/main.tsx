@@ -1,16 +1,18 @@
 'use client'
 
 import * as THREE from 'three';
+import scene from '@/app/components/3d/scene';
+import renderer from '@/app/components/3d/renderer';
+import solar from '@/app/components/3d/solarSystem';
+import earth from '@/app/components/3d/earth';
+import moonMesh from '@/app/components/3d/moon';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import {useEffect, useRef} from 'react'
 import { Box, useBreakpointValue} from '@chakra-ui/react'
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import Navbar from '@/app/components/nav';
 import { gsap } from "gsap";
 import { Headline, Tagline } from "@/app/components/text";
 import NavbarDesktop from "@/app/components/navDesktop";
-import { time } from 'console';
-
-
 
 export default function Sphere() {
 
@@ -19,15 +21,6 @@ export default function Sphere() {
 
     useEffect(() => {
         if(typeof window !== 'undefined') {
-            
-            // ---------- Scene -----------
-            const scene = new THREE.Scene();
-        
-            // ---------- Renderer -----------
-            const renderer = new THREE.WebGLRenderer({antialias:true});
-            renderer.setPixelRatio(2);
-            renderer.domElement.style.width = '100%';
-            renderer.domElement.style.height = '100%';
 
             // ---------- Camera -----------
             const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
@@ -37,37 +30,16 @@ export default function Sphere() {
             // ---------- Empty array to store all objects -----------
             let objects:THREE.Object3D[] = [];
 
-            // ---------- solar system mesh ---------
-            const solar = new THREE.Object3D();
-            scene.add(solar);
+            // ---------- adding solar-system-mesh, earth to the objects array---------
             objects.push(solar);
-
-            // ---------- globe texture -----------
-            const loader = new THREE.TextureLoader();
-            const earthTexture = loader.load('./earthTexture/earth05.jpeg');
-
-            // ---------- material globe earth -----------
-            const geometry = new THREE.SphereGeometry(3, 64, 64);
-            const material = new THREE.MeshBasicMaterial({
-                map: earthTexture
-            });          
-            const globe = new THREE.Mesh(geometry, material);
-            globe.position.set(0, 0, 0);
-            solar.add(globe);
-            objects.push(globe);
-
-            // ----------- moon texture ---------------
-            const moonTexture = loader.load('./moonTexture/moon01.jpeg');
-
-            // ----------- material globe moon --------------
-            const moon = new THREE.MeshBasicMaterial({
-                map: moonTexture
-            })
-            const moonMesh = new THREE.Mesh(geometry, moon);
-            globe.add(moonMesh);
-            moonMesh.position.set(8, 0  , 0);
-            moonMesh.scale.set(0.2, 0.2, 0.2);
+            objects.push(earth);
             objects.push(moonMesh);
+
+            // ---------- adding earth to the solar system mesh---------
+            solar.add(earth);
+
+            // ---------- adding moon to the earth ---------
+            earth.add(moonMesh);
 
             containerRef.current?.appendChild(renderer.domElement);
 
@@ -79,7 +51,7 @@ export default function Sphere() {
             
             //------------ gsap animation ---------
             const timeline = gsap.timeline({defaults: {duration: 1}});
-            timeline.fromTo(globe.scale, {x: 0, y: 0, z: 0}, {x: 1.5, y: 1.5, z: 1.5})
+            timeline.fromTo(earth.scale, {x: 0, y: 0, z: 0}, {x: 1.5, y: 1.5, z: 1.5})
 
             // ---------- Resize function that will run on window resize -----------
             const handleResize = () => {

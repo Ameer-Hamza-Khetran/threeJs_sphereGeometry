@@ -5,7 +5,7 @@ import { useDisclosure, IconButton, Heading, Text, Drawer, DrawerOverlay, Drawer
 import { HamburgerIcon } from '@chakra-ui/icons';
 
 export default function Navbar() {
-    const {isOpen, onClose, onOpen, onToggle} = useDisclosure();
+    const {isOpen, onClose, onToggle} = useDisclosure();
 
     return(
         <>
